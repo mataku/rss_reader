@@ -1,2 +1,3 @@
 rootProject.name = "RSS reader"
 include ':app'
+include ':test_helper'
