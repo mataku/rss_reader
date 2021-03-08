@@ -38,6 +38,25 @@ dependencies {
 
     implementation "${Dep.Kotlin.stdlib}"
     implementation "${Dep.AndroidX.appCompat}"
+    implementation "${Dep.AndroidX.lifecycleExtension}"
+
     implementation "${Dep.material}"
-    testImplementation "${Dep.UnitTest.junit}"
+    implementation "${Dep.OkHttp.okhttp3}"
+    implementation "${Dep.OkHttp.loggingInterceptor}"
+
+    implementation "${Dep.Kotlin.coroutines}"
+
+    implementation "${Dep.Retrofit.retrofit2}"
+    implementation("${Dep.Retrofit.simpleXmlConverter}") {
+        exclude module: 'stax'
+        exclude module: 'stax-api'
+        exclude module: 'xpp3'
+    }
+    testImplementation "${Dep.Test.junit}"
+    testImplementation "${Dep.Test.mockWebServer}"
+    testImplementation "${Dep.Test.kotlinTestJunit}"
+    testImplementation "${Dep.Test.coreTesting}"
+    testImplementation "${Dep.Test.coroutinesTest}"
+    testImplementation "${Dep.Test.robolectric}"
+    testImplementation project(":test_helper")
 }
