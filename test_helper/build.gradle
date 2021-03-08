@@ -1,0 +1,39 @@
+import dependency.Dep
+
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdkVersion 29
+
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation "${Dep.OkHttp.loggingInterceptor}"
+    implementation "${Dep.OkHttp.okhttp3}"
+    implementation "${Dep.Retrofit.retrofit2}"
+    implementation "${Dep.Retrofit.simpleXmlConverter}"
+    implementation "${Dep.Test.mockWebServer}"
+}
