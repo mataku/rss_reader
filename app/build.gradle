@@ -43,7 +43,9 @@ dependencies {
 
     implementation "${Dep.Kotlin.stdlib}"
     implementation "${Dep.AndroidX.appCompat}"
+    implementation "${Dep.AndroidX.constraintLayout}"
     implementation "${Dep.AndroidX.lifecycleExtension}"
+    implementation "${Dep.AndroidX.lifecycleViewModelKtx}"
 
     implementation "${Dep.material}"
     implementation "${Dep.OkHttp.okhttp3}"
@@ -57,6 +59,10 @@ dependencies {
         exclude module: 'stax-api'
         exclude module: 'xpp3'
     }
+
+    implementation "${Dep.AndroidX.viewPager}"
+    implementation "${Dep.AndroidX.recyclerView}"
+
     testImplementation "${Dep.Test.junit}"
     testImplementation "${Dep.Test.mockWebServer}"
     testImplementation "${Dep.Test.kotlinTestJunit}"

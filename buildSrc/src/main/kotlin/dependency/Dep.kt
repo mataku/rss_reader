@@ -13,7 +13,11 @@ object Dep {
 
     object AndroidX {
         const val appCompat = "androidx.appcompat:appcompat:1.1.0"
-        const val lifecycleExtension = "androidx.lifecycle:lifecycle-extensions:2.0.0"
+        const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
+        const val lifecycleExtension = "androidx.lifecycle:lifecycle-extensions:2.1.0"
+        const val lifecycleViewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0"
+        const val recyclerView = "androidx.recyclerview:recyclerview:1.1.0"
+        const val viewPager = "androidx.viewpager2:viewpager2:1.0.0"
     }
 
     const val material = "com.google.android.material:material:1.1.0"
