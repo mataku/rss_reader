@@ -19,7 +19,7 @@ class FeedRepository(
             val response = if (category == null) {
                 service.getOverallEntries()
             } else {
-                service.getOverallEntries()
+                service.getCategoryEntries(category = category)
             }
             val body = response.body()
             if (response.isSuccessful && body != null) {

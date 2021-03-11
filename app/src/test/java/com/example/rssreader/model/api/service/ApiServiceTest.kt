@@ -35,7 +35,6 @@ class ApiServiceTest {
             override fun dispatch(request: RecordedRequest): MockResponse {
                 return if (request.path == "/hotentry.rss") {
                     val body = AssetsHelper.getAssetFileStrings("hotentry.xml")
-                    println(body)
                     MockResponse().setResponseCode(200)
                         .setBody(body)
                 } else {
@@ -47,6 +46,30 @@ class ApiServiceTest {
 
         val mock = RetrofitFactory.mock(mockWebServer)
         val response = mock.create(ApiService::class.java).getOverallEntries()
+        assertTrue(response.isSuccessful)
+        val body = response.body()
+        assertTrue(body is HatenaRss)
+    }
+
+    @Test
+    fun getCategoryEntries() = runBlocking {
+        val category = "social"
+
+        val dispatcher = object : okhttp3.mockwebserver.Dispatcher() {
+            override fun dispatch(request: RecordedRequest): MockResponse {
+                return if (request.path == "/hotentry/${category}.rss") {
+                    val body = AssetsHelper.getAssetFileStrings("hotentry.xml")
+                    MockResponse().setResponseCode(200)
+                        .setBody(body)
+                } else {
+                    MockResponse().setResponseCode(404)
+                }
+            }
+        }
+        mockWebServer.dispatcher = dispatcher
+
+        val mock = RetrofitFactory.mock(mockWebServer)
+        val response = mock.create(ApiService::class.java).getCategoryEntries(category)
         assertTrue(response.isSuccessful)
         val body = response.body()
         assertTrue(body is HatenaRss)
