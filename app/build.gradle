@@ -58,5 +58,6 @@ dependencies {
     testImplementation "${Dep.Test.coreTesting}"
     testImplementation "${Dep.Test.coroutinesTest}"
     testImplementation "${Dep.Test.robolectric}"
+    testImplementation "${Dep.Test.mockito}"
     testImplementation project(":test_helper")
 }

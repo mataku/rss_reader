@@ -41,5 +41,6 @@ object Dep {
         const val coreTesting = "androidx.arch.core:core-testing:2.1.0"
         const val coroutinesTest = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.3"
         const val robolectric = "org.robolectric:robolectric:4.1"
+        const val mockito = "org.mockito:mockito-core:2.25.1"
     }
 }
