@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">RSS reader</string>
+
+    <string name="rss_item_image_description">Rss Feed Thumbnail</string>
 </resources>
