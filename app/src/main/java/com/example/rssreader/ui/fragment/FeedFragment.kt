@@ -1,9 +1,7 @@
 package com.example.rssreader.ui.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -11,8 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rssreader.R
 import com.example.rssreader.databinding.FragmentFeedBinding
-import com.example.rssreader.model.api.entity.HatenaRss
-import com.example.rssreader.model.api.entity.HatenaRssItem
 import com.example.rssreader.model.api.repository.FeedRepository
 import com.example.rssreader.ui.viewmodel.FeedViewModel
 import com.example.rssreader.ui.viewmodel.factory.FeedViewModelFactory
@@ -36,7 +32,7 @@ class FeedFragment(private val category: String = "") : Fragment(R.layout.fragme
         viewModel.fetchFeed(category)
 
         viewModel.feedLiveData.observe(viewLifecycleOwner, Observer {
-            adapter.addRssItemList(it.rssItemLIst)
+            adapter.addRssItemList(it.rssItemList)
         })
     }
 }
