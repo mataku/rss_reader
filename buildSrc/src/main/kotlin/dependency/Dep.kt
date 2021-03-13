@@ -12,7 +12,9 @@ object Dep {
     }
 
     object AndroidX {
+        const val activityKtx = "androidx.activity:activity-ktx:1.2.1"
         const val appCompat = "androidx.appcompat:appcompat:1.1.0"
+        const val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.1"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.0.4"
         const val lifecycleExtension = "androidx.lifecycle:lifecycle-extensions:2.1.0"
         const val lifecycleViewModelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0"

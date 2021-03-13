@@ -42,8 +42,10 @@ android {
 dependencies {
 
     implementation "${Dep.Kotlin.stdlib}"
+    implementation "${Dep.AndroidX.activityKtx}"
     implementation "${Dep.AndroidX.appCompat}"
     implementation "${Dep.AndroidX.constraintLayout}"
+    implementation "${Dep.AndroidX.fragmentKtx}"
     implementation "${Dep.AndroidX.lifecycleExtension}"
     implementation "${Dep.AndroidX.lifecycleViewModelKtx}"
 
