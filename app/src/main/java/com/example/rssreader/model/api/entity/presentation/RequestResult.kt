@@ -1,13 +1,13 @@
 package com.example.rssreader.model.api.entity.presentation
 
 // kotlin.Result のインターフェイスと揃えている
-sealed class FeedResult<T> {
-    data class Success<T>(val data: T) : FeedResult<T>()
-    data class Failure<T>(val throwable: Throwable) : FeedResult<T>()
+sealed class RequestResult<T> {
+    data class Success<T>(val data: T) : RequestResult<T>()
+    data class Failure<T>(val throwable: Throwable) : RequestResult<T>()
 
     companion object {
-        fun <T> success(data: T): FeedResult<T> = Success(data)
-        fun <T> failure(throwable: Throwable): FeedResult<T> = Failure(throwable)
+        fun <T> success(data: T): RequestResult<T> = Success(data)
+        fun <T> failure(throwable: Throwable): RequestResult<T> = Failure(throwable)
     }
 
     fun isSuccess(): Boolean {
@@ -35,15 +35,15 @@ sealed class FeedResult<T> {
     }
 }
 
-inline fun <T> FeedResult<T>.onFailure(action: (exception: Throwable) -> Unit): FeedResult<T> {
+inline fun <T> RequestResult<T>.onFailure(action: (exception: Throwable) -> Unit): RequestResult<T> {
     exceptionOrNull()?.let {
         action(it)
     }
     return this
 }
 
-inline fun <T> FeedResult<T>.onSuccess(action: (value: T) -> Unit): FeedResult<T> {
-    if (this is FeedResult.Success) {
+inline fun <T> RequestResult<T>.onSuccess(action: (value: T) -> Unit): RequestResult<T> {
+    if (this is RequestResult.Success) {
         action(this.data)
     }
     return this
