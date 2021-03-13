@@ -3,6 +3,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment_feed_contents"
+        android:layoutAnimation="@anim/list_fade_in"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </layout>

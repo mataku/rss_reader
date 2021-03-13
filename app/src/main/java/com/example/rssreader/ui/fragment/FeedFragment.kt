@@ -36,6 +36,7 @@ class FeedFragment(private val category: String = "") : Fragment(R.layout.fragme
 
         viewModel.feedLiveData.observeOnce(viewLifecycleOwner, Observer {
             adapter.addRssItemList(it.rssItemList)
+            binding.fragmentFeedContents.scheduleLayoutAnimation()
             it.error?.let {
                 Toast.makeText(
                     context,
