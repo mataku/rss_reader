@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="rssItem"
+            type="com.example.rssreader.model.api.entity.HatenaRssItem" />
+
+        <variable
+            name="rssItemClickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/space_8"
+        android:paddingBottom="@dimen/space_8"
+        android:onClick="@{rssItemClickListener}"
+        android:background="?android:attr/selectableItemBackground" >
+
+        <ImageView
+            android:id="@+id/view_feed_item_thumbnail"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            tools:src="@drawable/ic_launcher_background"
+            android:layout_marginStart="@dimen/space_16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/rss_item_image_description"
+            app:imageUrl="@{rssItem.imageUrl}" />
+
+        <TextView
+            android:id="@+id/view_feed_item_feed_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_16"
+            android:layout_marginEnd="@dimen/space_16"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="@{rssItem.title}"
+            android:textSize="@dimen/text_size_subtitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/view_feed_item_thumbnail"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="2021年1月1日の日記だよーーーーーーーーーーーーーーーーーーー" />
+
+        <TextView
+            android:id="@+id/view_feed_item_feed_site_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_16"
+            android:layout_marginTop="@dimen/space_12"
+            android:layout_marginEnd="@dimen/space_16"
+            android:textColor="@color/text_secondary"
+            android:text="@{rssItem.link}"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/view_feed_item_thumbnail"
+            app:layout_constraintTop_toBottomOf="@id/view_feed_item_feed_title"
+            tools:text="わくわく日記" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
