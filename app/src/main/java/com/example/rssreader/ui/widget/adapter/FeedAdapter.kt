@@ -1,14 +1,13 @@
 package com.example.rssreader.ui.widget.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.rssreader.model.api.entity.HatenaRssItem
-
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rssreader.R
 import com.example.rssreader.databinding.ViewFeedItemBinding
+import com.example.rssreader.model.api.entity.HatenaRssItem
+import com.example.rssreader.ui.activity.FeedDetailActivity
 
 class FeedAdapter() : RecyclerView.Adapter<FeedAdapter.CustomItemViewHolder>() {
 
@@ -45,13 +44,9 @@ class FeedAdapter() : RecyclerView.Adapter<FeedAdapter.CustomItemViewHolder>() {
         fun setRssItem(rssItem: HatenaRssItem) {
             binding.rssItem = rssItem
             binding.rssItemClickListener = View.OnClickListener {
-
+                val intent = FeedDetailActivity.IntentBuilder(view.context, rssItem.link).build()
+                view.context.startActivity(intent)
             }
         }
-
     }
-
-
-
-
 }
