@@ -11,14 +11,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/Theme.RSSReader">
-    
-        <activity android:name=".ui.activity.MainActivity">
+
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:exported="false"
+            android:name=".ui.activity.FeedDetailActivity"
+            android:configChanges="orientation|screenSize" />
     </application>
 
 </manifest>
