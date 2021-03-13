@@ -24,6 +24,7 @@ class FeedFragment(private val category: String = "") : Fragment(R.layout.fragme
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentFeedBinding.bind(view)
+        binding.lifecycleOwner = viewLifecycleOwner
         val adapter = FeedAdapter()
         val layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
         binding.fragmentFeedContents.layoutManager = layoutManager
