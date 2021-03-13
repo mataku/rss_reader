@@ -14,19 +14,23 @@ class FeedRepository(
     private val rssClient: RSSClient = RSSClient
 ) {
     suspend fun fetch(category: String): RequestResult<List<HatenaRssItem>> {
-        return withContext(coroutineContext) {
-            val service = rssClient.create(ApiService::class.java)
-            val response = if (category.isEmpty()) {
-                service.getOverallEntries()
-            } else {
-                service.getCategoryEntries(category = category)
+        return try {
+            withContext(coroutineContext) {
+                val service = rssClient.create(ApiService::class.java)
+                val response = if (category.isEmpty()) {
+                    service.getOverallEntries()
+                } else {
+                    service.getCategoryEntries(category = category)
+                }
+                val body = response.body()
+                if (response.isSuccessful && body != null) {
+                    RequestResult.success(body.items)
+                } else {
+                    RequestResult.failure(response.toNetworkError())
+                }
             }
-            val body = response.body()
-            if (response.isSuccessful && body != null) {
-                RequestResult.success(body.items)
-            } else {
-                RequestResult.failure(response.toNetworkError())
-            }
+        } catch (e: Throwable) {
+            RequestResult.failure(e)
         }
     }
 }

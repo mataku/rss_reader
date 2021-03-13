@@ -4,4 +4,9 @@
     <string name="rss_item_image_description">Rss Feed Thumbnail</string>
 
     <string name="error_message_failed_to_show_feed_detail">記事の取得に失敗しました。</string>
+
+    <string name="error_message_feed_failed_unexpectedly">記事の取得に失敗しました。時間をおいてお試しください。</string>
+
+    <string name="error_message_category_failed_unexpectedly">カテゴリの取得に失敗しました。時間をおいてお試しください。</string>
+
 </resources>

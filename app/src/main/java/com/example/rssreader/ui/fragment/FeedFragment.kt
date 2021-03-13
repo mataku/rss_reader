@@ -2,6 +2,7 @@ package com.example.rssreader.ui.fragment
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -35,6 +36,13 @@ class FeedFragment(private val category: String = "") : Fragment(R.layout.fragme
 
         viewModel.feedLiveData.observeOnce(viewLifecycleOwner, Observer {
             adapter.addRssItemList(it.rssItemList)
+            it.error?.let {
+                Toast.makeText(
+                    context,
+                    R.string.error_message_feed_failed_unexpectedly,
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         })
     }
 }

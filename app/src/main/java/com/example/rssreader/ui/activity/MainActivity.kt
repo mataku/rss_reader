@@ -1,6 +1,7 @@
 package com.example.rssreader.ui.activity
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -39,6 +40,13 @@ class MainActivity : AppCompatActivity() {
                 TabLayoutMediator(binding.activityMainTabLayout, viewPager) { tab, position ->
                     tab.text = it.categoryList[position].localizedName
                 }.attach()
+            }
+            it.throwable?.let {
+                Toast.makeText(
+                    this,
+                    R.string.error_message_category_failed_unexpectedly,
+                    Toast.LENGTH_LONG
+                ).show()
             }
         })
         viewModel.fetchCategoryList()
