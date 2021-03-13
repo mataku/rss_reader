@@ -15,7 +15,7 @@ import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import retrofit2.Response
-import kotlin.jvm.Throws
+import java.util.concurrent.TimeoutException
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertTrue
@@ -29,7 +29,11 @@ class FeedRepositoryTest {
     @Mock
     private lateinit var apiService: ApiService
 
-    private val mockHatenaRssItem = HatenaRssItem(title = "", link = "https://example.com", imageUrl = "https://example.com/image.jpg")
+    private val mockHatenaRssItem = HatenaRssItem(
+        title = "",
+        link = "https://example.com",
+        imageUrl = "https://example.com/image.jpg"
+    )
 
     private val category = "social"
 
@@ -60,7 +64,10 @@ class FeedRepositoryTest {
     @Throws(Throwable::class)
     fun `fetch_categoryIsNull_総合のrssを取得失敗_NetworkErrorで返す`() = runBlockingTest {
         Mockito.`when`(apiService.getOverallEntries()).thenReturn(
-            Response.error(404, ResponseBody.Companion.create("application/xml".toMediaTypeOrNull(), "404"))
+            Response.error(
+                404,
+                ResponseBody.Companion.create("application/xml".toMediaTypeOrNull(), "404")
+            )
         )
 
         val repository = FeedRepository(
@@ -94,7 +101,10 @@ class FeedRepositoryTest {
     @Throws(Throwable::class)
     fun `fetch_categoryが渡される_rssを取得失敗_NetworkErrorで返す`() = runBlockingTest {
         Mockito.`when`(apiService.getCategoryEntries(category)).thenReturn(
-            Response.error(404, ResponseBody.Companion.create("application/xml".toMediaTypeOrNull(), "404"))
+            Response.error(
+                404,
+                ResponseBody.Companion.create("application/xml".toMediaTypeOrNull(), "404")
+            )
         )
 
         val repository = FeedRepository(
@@ -105,5 +115,22 @@ class FeedRepositoryTest {
         val result = repository.fetch(category)
         assertTrue(result.isFailure())
         assertTrue(result.exceptionOrNull() is NetworkError)
+    }
+
+    @Test
+    @Throws(Throwable::class)
+    fun `fetch_throwError_発生したエラーをfailureで返す`() = runBlockingTest {
+        Mockito.`when`(apiService.getCategoryEntries(category)).then {
+            throw TimeoutException("error")
+        }
+
+        val repository = FeedRepository(
+            coroutineContext = Dispatchers.Unconfined,
+            rssClient = rssClient
+        )
+
+        val result = repository.fetch(category)
+        assertTrue(result.isFailure())
+        assertTrue(result.exceptionOrNull() is TimeoutException)
     }
 }
