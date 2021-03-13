@@ -2,6 +2,7 @@ package com.example.rssreader.ui.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.rssreader.model.api.entity.HatenaRssItem
+import com.example.rssreader.model.api.entity.presentation.NetworkError
 import com.example.rssreader.model.api.entity.presentation.RequestResult
 import com.example.rssreader.model.api.repository.FeedRepository
 import com.example.rssreader.test_helper.TestObserver
@@ -37,7 +38,7 @@ class FeedViewModelTest {
         MockitoAnnotations.initMocks(this)
         Dispatchers.setMain(Dispatchers.Unconfined)
     }
-    
+
     @AfterTest
     fun tearDown() {
         Dispatchers.resetMain()
@@ -70,6 +71,28 @@ class FeedViewModelTest {
         val result = observer.get()
         assertNotNull(result)
         assertNull(result.error)
-        assertTrue(result.rssItemLIst.isNotEmpty())
+        assertTrue(result.rssItemList.isNotEmpty())
     }
+
+    @Test
+    @Throws(Throwable::class)
+    fun fetchFeed_failure_returnFeedUiModelWithError() = runBlocking {
+        Mockito.`when`(feedRepository.fetch(category)).thenReturn(
+            RequestResult.failure(
+                NetworkError(responseCode = 404)
+            )
+        )
+        val observer = TestObserver<FeedViewModel.FeedUiModel>()
+        val viewModel = FeedViewModel(feedRepository = feedRepository)
+        viewModel.feedLiveData.observeForever(observer)
+
+        viewModel.fetchFeed(category)
+        observer.await()
+
+        val result = observer.get()
+        assertNotNull(result)
+        assertTrue(result.error is NetworkError)
+        assertTrue(result.rssItemList.isEmpty())
+    }
+
 }

@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 class FeedViewModel(private val feedRepository: FeedRepository) : ViewModel() {
 
     data class FeedUiModel(
-        val rssItemLIst: List<HatenaRssItem> = emptyList(),
+        val rssItemList: List<HatenaRssItem> = emptyList(),
         val error: Throwable? = null
     )
 
@@ -26,7 +26,7 @@ class FeedViewModel(private val feedRepository: FeedRepository) : ViewModel() {
             result
                 .onSuccess {
                     _feedLiveData.postValue(
-                        FeedUiModel(rssItemLIst = it)
+                        FeedUiModel(rssItemList = it)
                     )
                 }
                 .onFailure {
