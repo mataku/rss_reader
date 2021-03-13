@@ -51,7 +51,7 @@ class FeedRepositoryTest {
             rssClient = rssClient
         )
 
-        val result = repository.fetch(null)
+        val result = repository.fetch("")
         assertTrue(result.isSuccess())
         assertTrue(result.getOrNull() is List<HatenaRssItem>)
     }
@@ -68,7 +68,7 @@ class FeedRepositoryTest {
             rssClient = rssClient
         )
 
-        val result = repository.fetch(null)
+        val result = repository.fetch("")
         assertTrue(result.isFailure())
         assertTrue(result.exceptionOrNull() is NetworkError)
     }
