@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rssreader.R
 import com.example.rssreader.databinding.FragmentFeedBinding
 import com.example.rssreader.model.api.repository.FeedRepository
+import com.example.rssreader.ui.extention.observeOnce
 import com.example.rssreader.ui.viewmodel.FeedViewModel
 import com.example.rssreader.ui.viewmodel.factory.FeedViewModelFactory
 import com.example.rssreader.ui.widget.adapter.FeedAdapter
@@ -32,7 +33,7 @@ class FeedFragment(private val category: String = "") : Fragment(R.layout.fragme
         binding.fragmentFeedContents.addItemDecoration(FeedItemDecoration())
         viewModel.fetchFeed(category)
 
-        viewModel.feedLiveData.observe(viewLifecycleOwner, Observer {
+        viewModel.feedLiveData.observeOnce(viewLifecycleOwner, Observer {
             adapter.addRssItemList(it.rssItemList)
         })
     }

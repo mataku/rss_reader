@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import com.example.rssreader.R
 import com.example.rssreader.databinding.ActivityMainBinding
 import com.example.rssreader.model.api.repository.FeedCategoryListRepository
+import com.example.rssreader.ui.extention.observeOnce
 import com.example.rssreader.ui.viewmodel.MainViewModel
 import com.example.rssreader.ui.viewmodel.factory.MainViewModelFactory
 import com.example.rssreader.ui.widget.adapter.FeedPagerAdapter
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
             MainViewModelFactory(FeedCategoryListRepository())
         }
 
-        viewModel.categoryLiveData.observe(this, Observer {
+        viewModel.categoryLiveData.observeOnce(this, Observer {
             if (it.categoryList.isNotEmpty()) {
                 val pagerAdapter = FeedPagerAdapter(
                     this,
