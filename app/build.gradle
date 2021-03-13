@@ -65,6 +65,9 @@ dependencies {
     implementation "${Dep.AndroidX.viewPager}"
     implementation "${Dep.AndroidX.recyclerView}"
 
+    implementation "${Dep.Glide.glide}"
+    implementation "${Dep.Glide.compiler}"
+
     testImplementation "${Dep.Test.junit}"
     testImplementation "${Dep.Test.mockWebServer}"
     testImplementation "${Dep.Test.kotlinTestJunit}"

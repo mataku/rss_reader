@@ -5,6 +5,7 @@ object Dep {
     private const val KOTLIN_VERSION = "1.4.30"
     private const val OKHTTP_VERSION = "4.9.1"
     private const val RETROFIT_VERSION = "2.9.0"
+    private const val GLIDE_VERSION = "4.12.0"
 
     object GradlePlugin {
         const val androidGradlePlugin = "com.android.tools.build:gradle:4.1.2"
@@ -38,6 +39,11 @@ object Dep {
         const val retrofit2 = "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
         const val simpleXmlConverter =
             "com.squareup.retrofit2:converter-simplexml:$RETROFIT_VERSION"
+    }
+
+    object Glide {
+        const val glide = "com.github.bumptech.glide:glide:$GLIDE_VERSION"
+        const val compiler = "com.github.bumptech.glide:compiler:$GLIDE_VERSION"
     }
 
     object Test {
