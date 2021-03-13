@@ -36,4 +36,5 @@ dependencies {
     implementation "${Dep.Retrofit.retrofit2}"
     implementation "${Dep.Retrofit.simpleXmlConverter}"
     implementation "${Dep.Test.mockWebServer}"
+    implementation "${Dep.AndroidX.lifecycleExtension}"
 }
