@@ -5,6 +5,7 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
 
+// Referenced from https://star-zero.medium.com/livedata%E3%81%AEunittest-2b295d2818c1
 class TestObserver<T>(count: Int = 1) : Observer<T> {
 
     private val values = mutableListOf<T?>()
